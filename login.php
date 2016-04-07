@@ -1,11 +1,28 @@
 <?php
 	require_once ("functions.php");
 	
+	if(isset($_SESSION["user_id"])){
+		//redirect user to the restricted page
+		header("Location: restrict.php");
+		
+	}
+	
 	if (isset($_POST["login"])){
 		
 	
 		//log in
 		echo "Loggin in...";
+		
+		//the fields are not empty
+		if(!empty($_POST["username"]) && !empty($_POST["password"])){
+			
+			//save to db
+			login($_POST["username"], $_POST["password"]);
+			
+		}else{
+			echo "Both fields are required! ";
+			
+		}
 		
 	//sign up button clicked	
 	}else if (isset($_POST["signup"])){
